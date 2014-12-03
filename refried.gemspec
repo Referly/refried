@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.date        = '2014-11-23'
   s.summary     = "Beanstalk Client"
   s.description = "An enhancement"
-  s.authors     = ["caldwecr"]
-  s.email       = 'caldwecr@mattermark.com'
+  s.authors     = ["Courtland Caldwell"]
+  s.email       = 'courtland@mattermark.com'
   s.files       = ["lib/refried.rb", "lib/refried/configuration.rb", "lib/refried/puter.rb", "lib/refried/tubes.rb"] # Remember don't add Rakefile or Gemfile to this list
   s.homepage    =
       'http://rubygems.org/gems/refried'
