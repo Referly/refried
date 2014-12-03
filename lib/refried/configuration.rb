@@ -7,7 +7,7 @@ module Refried
     attr_accessor :beanstalk_url      # beanstalk url connection
 
     def initialize
-      @beanstalk_url     = ["localhost"]
+      @beanstalk_url     = "localhost"
     end
   end # Configuration
 end # Refried

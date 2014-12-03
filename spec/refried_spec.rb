@@ -19,7 +19,7 @@ describe 'Refried' do
         subject(:mut) { Refried.configuration }
         it { is_expected.to respond_to :beanstalk_url }
         it "has a default beanstalk url of localhost" do
-          expect(Refried.configuration.beanstalk_url).to eq ['localhost']
+          expect(Refried.configuration.beanstalk_url).to eq 'localhost'
         end
 
         context 'when a valid block has been passed to #configure' do
