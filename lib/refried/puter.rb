@@ -10,7 +10,7 @@ module Refried
     end
 
     module ClassMethods
-      SUPPORTED_MODES = [:simple, :type_map, :alias_map]
+      SUPPORTED_MODES = [:simple, :tube_name, :type_map, :alias_map]
 
       # Set the mode of function that the Puter should follow
       #
@@ -67,16 +67,15 @@ module Refried
           raise ArgumentError, "Selectors to #tube were unexpected for current puter_mode; alias_map = #{a_map}; puter mode = #{self.class.puter_mode}; selectors = #{selectors}"
         end
         case self.class.puter_mode
-          when :simple
-            tube_name = self.class.to_s.downcase
           when :alias_map
-            tube_alias = selectors[:alias]
-            tube_name = self.alias_map[tube_alias]
+            tube_name = self.tube_name selectors
+          when :simple, :tube_name
+            tube_name = self.tube_name
           else
             raise ArgumentError, 'Invalid puter mode detected in the #tube method.'
         end
         tube_name ||= nil
-        tube ||= Refried.tubes.find tube_name
+        tube ||= Refried.tubes.find tube_name.to_s
       end
 
       # This method converts the payload object into a format for injection
@@ -101,11 +100,28 @@ module Refried
         end
       end
 
+      # Get the currently registered tube name
+      #
+      # @param selectors [Hash] this argument is passed in to specify mappings when using the :alias_map puter mode
+      # @return [Symbol] the tube name
+      def tube_name(selectors = {})
+        @tube_name = self.class.to_s.downcase.to_sym if self.class.puter_mode == :simple
+        @tube_name = self.alias_map[selectors[:alias]].to_sym if self.class.puter_mode == :alias_map
+        @tube_name ||= nil
+      end
+
+      # Set the tube name - this only has an impact when using the :tube_name puter mode
+      #
+      # @param tube_name [Symbol] the value to set the tube name
+      def tube_name=(tube_name)
+        @tube_name = tube_name
+      end
+
     protected
       def locatable? (selectors = {})
         case self.class.puter_mode
-          when :simple
-            selectors.nil? || selectors.is_a?(Hash) && selectors.count == 0
+          when :simple, :tube_name
+            true
           when :alias_map
             if selectors.is_a? Hash
               l = selectors.has_key?(:alias) && selectors[:alias].is_a?(Symbol) && self.alias_map.has_key?(selectors[:alias])
@@ -120,7 +136,7 @@ module Refried
         begin
           logger.info message
         rescue => e
-          puts "Failed to access logger, message that should have been logged = #{message}"
+          #puts "Failed to access logger, message that should have been logged = #{message}"
         end
       end
     end

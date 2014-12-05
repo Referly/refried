@@ -8,7 +8,7 @@ describe 'A class that is acting as a puter' do
   it { is_expected.to respond_to :puter_mode }
 
   # Cannot use a let here because it needs to be accessible outside of it blocks
-  valid_modes = [:simple, :type_map, :alias_map]
+  valid_modes = [:simple, :type_map, :alias_map, :tube_name]
   let(:i_put_class) { class IPut; acts_as_puter; end }
   let(:i_put) { i_put_class.new }
 
@@ -57,6 +57,8 @@ describe 'An instance of a class that is acting as a puter' do
   it { is_expected.to respond_to :put }
   it { is_expected.to respond_to :tube }
   it { is_expected.to respond_to :generate_message }
+  it { is_expected.to respond_to :tube_name }
+  it { is_expected.to respond_to :tube_name= }
 
   describe '#generate_message' do
     context 'receives one argument' do
@@ -91,17 +93,9 @@ describe 'An instance of a class that is acting as a puter' do
     end
     context 'when the puter_mode is :simple' do
       before { i_put_class.puter_mode = :simple }
-      context 'and the selectors hash argument is not empty' do
-        let(:selectors) { {foo: 'bar'} }
-        it 'is expected to raise ArgumentError' do
-          expect { mut }.to raise_error ArgumentError
-        end
-      end
-      context 'and the selectors hash argument is empty' do
-        let(:expected) { Refried.tubes.find 'iput' }
-        it { is_expected.to be_a Beaneater::Tube }
-        it { pending("Get == working between Beaneater tubes"); is_expected.to eq expected }
-      end
+      let(:expected) { Refried.tubes.find 'iput' }
+      it { is_expected.to be_a Beaneater::Tube }
+      it { pending("Get == working between Beaneater tubes"); is_expected.to eq expected }
     end
     context 'when the puter_mode is :alias_map' do
       before { i_put_class.puter_mode = :alias_map }
@@ -135,10 +129,46 @@ describe 'An instance of a class that is acting as a puter' do
     end
   end
 
+  describe '#tube_name' do
+    let(:selectors) { nil }
+
+    subject(:mut) { i_put.tube_name selectors }
+
+    context 'when puter_mode is :simple' do
+      before { i_put_class.puter_mode = :simple }
+      let(:expected) { :iput }
+      it { is_expected.to eq expected  }
+    end
+
+    context 'when puter_mode is :tube_name' do
+      before { i_put_class.puter_mode = :tube_name; i_put.tube_name = expected }
+      let(:expected) { "expected_tube_name" }
+      it { is_expected.to eq expected  }
+    end
+  end
+
   describe '#put' do
+    let(:item) { 123 }
+    let(:expected) { item.to_json }
+
+    context 'with puter_mode of :simple' do
+      let(:name_of_tube) { "simpletesttube" }
+      before { i_put_class.puter_mode = :simple }
+      after { i_put.tube.clear }
+      it 'adds the item to the beanstalk queue' do
+        expect(i_put.put(item)[:status]).to eq "INSERTED"
+      end
+    end
+    context 'with puter_mode of :tube_name' do
+      let(:name_of_tube) { "testtubetube" }
+      before { i_put_class.puter_mode = :tube_name; i_put.tube_name = name_of_tube }
+      after { i_put.tube.clear }
+      it 'adds the item to the beanstalk queue' do
+        expect(i_put.put(item)[:status]).to eq "INSERTED"
+      end
+    end
     context 'with puter_mode of :alias_map' do
-      let(:item) { 123 }
-      let(:expected) { item.to_json }
+      before { i_put_class.puter_mode = :alias_map }
       after { i_put.tube(alias: :foobar).clear }
       it 'successfully adds the item to the beanstalk queue' do
         i_put.puter_tube_alias_map = { foobar: 'foobar' }

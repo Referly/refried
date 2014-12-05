@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'refried'
-  s.version     = '0.0.5-dev'
+  s.version     = '0.0.6-dev'
   s.date        = '2014-11-23'
   s.summary     = "Beanstalk Client"
   s.description = "An enhancement"
