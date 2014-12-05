@@ -2,7 +2,7 @@ module Refried
   class Tubes
     # TODO: connect to configuration
     def initialize
-      @pool ||= Beaneater::Pool.new(Refried.configuration.beanstalk_url)
+      @pool ||= Beaneater::Pool.new(::Refried.configuration.beanstalk_url)
       @tubes = @pool.tubes
     end
 

@@ -33,22 +33,24 @@ module Refried
       # Get the currently registered tube name
       #
       # @return [Symbol] the tube name
-      def tube_name
-        @tube_name ||= nil
+      def getter_tube_name
+        @getter_tube_name ||= nil
       end
+      alias_method :tube_name, :getter_tube_name
 
       # Set the tube name - this only has an impact when using the :tube_name getter mode
       #
       # @param tube_name [Symbol] the value to set the tube name
-      def tube_name=(tube_name)
-        @tube_name = tube_name
+      def getter_tube_name=(tube_name)
+        @getter_tube_name = tube_name
       end
+      alias_method :tube_name=, :getter_tube_name=
 
       # Get a the next job from the tube
       #
       # @return [Beanstalk::Job] the next job from the tube
       def get
-        tube = Refried.tubes.find self.tube_name.to_s
+        tube = ::Refried.tubes.find self.getter_tube_name.to_s
         tube.reserve
       end
 

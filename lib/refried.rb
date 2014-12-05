@@ -3,6 +3,7 @@ require 'refried/configuration'
 require 'refried/tubes'
 require 'refried/puter'
 require 'refried/getter'
+require 'refried/refried'
 
 # Refried core API methods
 #  based in part on the design of backburner (https://github.com/nesquena/backburner MIT license)

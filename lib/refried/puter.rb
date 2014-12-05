@@ -67,14 +67,14 @@ module Refried
         end
         case self.class.puter_mode
           when :alias_map
-            tube_name = self.tube_name selectors
+            tube_name = self.puter_tube_name selectors
           when :simple, :tube_name
-            tube_name = self.tube_name
+            tube_name = self.puter_tube_name
           else
             raise ArgumentError, 'Invalid puter mode detected in the #tube method.'
         end
         tube_name ||= nil
-        tube ||= Refried.tubes.find tube_name.to_s
+        tube ||= ::Refried.tubes.find tube_name.to_s
       end
 
       # This method converts the payload object into a format for injection
@@ -103,18 +103,20 @@ module Refried
       #
       # @param selectors [Hash] this argument is passed in to specify mappings when using the :alias_map puter mode
       # @return [Symbol] the tube name
-      def tube_name(selectors = {})
-        @tube_name = self.class.to_s.downcase.to_sym if self.class.puter_mode == :simple
-        @tube_name = self.alias_map[selectors[:alias]].to_sym if self.class.puter_mode == :alias_map
-        @tube_name ||= nil
+      def puter_tube_name(selectors = {})
+        @puter_tube_name = self.class.to_s.downcase.to_sym if self.class.puter_mode == :simple
+        @puter_tube_name = self.alias_map[selectors[:alias]].to_sym if self.class.puter_mode == :alias_map
+        @puter_tube_name ||= nil
       end
+      alias_method :tube_name, :puter_tube_name
 
       # Set the tube name - this only has an impact when using the :tube_name puter mode
       #
       # @param tube_name [Symbol] the value to set the tube name
-      def tube_name=(tube_name)
-        @tube_name = tube_name
+      def puter_tube_name=(tube_name)
+        @puter_tube_name = tube_name
       end
+      alias_method :tube_name=, :puter_tube_name=
 
     protected
       def locatable? (selectors = {})
