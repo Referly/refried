@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'refried'
   s.version     = '0.0.6-dev'
-  s.date        = '2014-11-23'
-  s.summary     = "Beanstalk Client"
-  s.description = "An enhancement"
+  s.date        = '2014-12-05'
+  s.summary     = "Make Ruby objects behave like Beanstalk tubes"
+  s.description = "Provides acts_as_ mixins for adding Beanstalk tube functionality to your existing Ruby objects."
   s.authors     = ["Courtland Caldwell"]
   s.email       = 'courtland@mattermark.com'
   s.files       = [
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
       "lib/refried/refried.rb"
   ] # Remember don't add Rakefile or Gemfile to this list
   s.homepage    =
-      'http://rubygems.org/gems/refried'
+      'https://github.com/caldwecr/refried'
   s.add_runtime_dependency "beaneater", "~> 0.3", ">= 0.3.3"
   s.add_development_dependency "simplecov", "~> 0.9"
   s.license     = "MIT"
