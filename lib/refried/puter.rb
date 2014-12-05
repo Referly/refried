@@ -21,7 +21,7 @@ module Refried
         end
         @puter_mode = mode
       end
-
+      alias_method :put_mode, :puter_mode=
       # Get the current mapping mode of the Puter
       #
       # @return [Symbol] the current mapping mode of the Puter
