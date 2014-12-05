@@ -1,5 +1,4 @@
 require 'beaneater'
-require 'byebug'
 
 module Refried
   module Getter
