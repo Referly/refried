@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "An enhancement"
   s.authors     = ["Courtland Caldwell"]
   s.email       = 'courtland@mattermark.com'
-  s.files       = ["lib/refried.rb", "lib/refried/configuration.rb", "lib/refried/puter.rb", "lib/refried/tubes.rb"] # Remember don't add Rakefile or Gemfile to this list
+  s.files       = ["lib/refried.rb", "lib/refried/configuration.rb", "lib/refried/puter.rb", "lib/refried/tubes.rb", "lib/refried/getter.rb"] # Remember don't add Rakefile or Gemfile to this list
   s.homepage    =
       'http://rubygems.org/gems/refried'
   s.add_runtime_dependency "beaneater", "~> 0.3", ">= 0.3.3"
