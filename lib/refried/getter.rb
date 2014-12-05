@@ -1,4 +1,5 @@
 require 'beaneater'
+require 'byebug'
 
 module Refried
   module Getter
@@ -42,6 +43,14 @@ module Refried
       # @param tube_name [Symbol] the value to set the tube name
       def tube_name=(tube_name)
         @tube_name = tube_name
+      end
+
+      # Get a the next job from the tube
+      #
+      # @return [Beanstalk::Job] the next job from the tube
+      def get
+        tube = Refried.tubes.find self.tube_name.to_s
+        tube.reserve
       end
 
       protected
