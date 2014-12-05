@@ -25,7 +25,7 @@ module Refried
       #
       # @return [Symbol] the current mapping mode of the getter
       def getter_mode
-        @getter_mode ||= :simple
+        @getter_mode ||= :tube_name
       end
     end
 
