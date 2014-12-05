@@ -6,6 +6,7 @@ describe 'A class that is acting as a puter' do
   subject { class IPut; acts_as_puter; end }
   it { is_expected.to respond_to :puter_mode= }
   it { is_expected.to respond_to :puter_mode }
+  it { is_expected.to respond_to :put_mode }
 
   # Cannot use a let here because it needs to be accessible outside of it blocks
   valid_modes = [:simple, :type_map, :alias_map, :tube_name]
@@ -15,7 +16,7 @@ describe 'A class that is acting as a puter' do
   describe '#puter_mode=' do
     let(:mut) { i_put.class.puter_mode = mode }
     let(:mode) { :invalid_mode }
-    it 'raises an ArgumentError if receives an argument other than :simple, :type_map, or :alias_map' do
+    it 'raises an ArgumentError if receives an argument other than :simple, :type_map, :alias_map, or :tube_name' do
       expect { mut }.to raise_error ArgumentError
     end
     context 'when receiving a mode parameter that is valid' do
