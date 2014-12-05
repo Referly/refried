@@ -11,10 +11,9 @@ module Refried
 
     module ClassMethods
       SUPPORTED_MODES = [:simple, :tube_name, :type_map, :alias_map]
-
       # Set the mode of function that the Puter should follow
       #
-      # @param mode [Symbol] which mapping mode the puter uses, `:simple`, `:type_map` or `:alias_map`
+      # @param mode [Symbol] which mapping mode the puter uses, `:simple`, `:type_map`, `:alias_map`, or `:tube_name`
       def puter_mode=(mode)
         unless SUPPORTED_MODES.include? mode
           raise ArgumentError, "Unsupported mode for acts as puter."
