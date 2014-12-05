@@ -178,7 +178,7 @@ shared_examples_for "an instance of a class that is acting as a puter" do |klass
     end
     context 'when the puter_mode is :simple' do
       before { i_put_class.puter_mode = :simple }
-      let(:expected) { Refried.tubes.find 'iput' }
+      let(:expected) { Tube.tubes.find 'iput' }
       it { is_expected.to be_a Beaneater::Tube }
       it { pending("Get == working between Beaneater tubes"); is_expected.to eq expected }
     end

@@ -1,5 +1,6 @@
-require 'rspec'
-require_relative 'spec_helper'
+require 'spec_helper'
+require 'byebug'
+
 
 describe 'Refried' do
   describe 'public API' do
@@ -40,6 +41,7 @@ describe 'Refried' do
 
       describe '#tubes' do
         subject { Refried.tubes }
+        before { Refried.configure reset: true }
         it { is_expected.to be_a Refried::Tubes }
       end
     end

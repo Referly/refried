@@ -3,7 +3,7 @@ require 'refried/configuration'
 require 'refried/tubes'
 require 'refried/puter'
 require 'refried/getter'
-require 'refried/refried'
+require 'refried/tube'
 
 # Refried core API methods
 #  based in part on the design of backburner (https://github.com/nesquena/backburner MIT license)
@@ -13,10 +13,14 @@ module Refried
     # Allows the user to set configuration options
     #  by yielding the configuration block
     #
-    # @param block [Block]
+    # @param opts [Hash] an optional hash of options, supported options are `reset: true`
+    # @param block [Block] an optional configuration block
     # @return [Configuration] the current configuration object
-    def configure(&block)
-      yield(configuration)
+    def configure(opts = {}, &block)
+      if opts.has_key? :reset && opts[:reset]
+        @configuration = nil
+      end
+      yield(configuration) if block_given?
       configuration
     end
 
