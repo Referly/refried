@@ -5,12 +5,12 @@ module Refried
   module Tube
     module ActsAsTube
       def acts_as_tube
-        send :include, InstanceMethods
         send :include, Getter::InstanceMethods
         send :include, Puter::InstanceMethods
-        send :extend, ClassMethods
+        send :include, InstanceMethods
         send :extend, Getter::ClassMethods
         send :extend, Puter::ClassMethods
+        send :extend, ClassMethods
       end
     end
 
