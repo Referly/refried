@@ -27,12 +27,23 @@ describe 'Refried' do
           before do
             Refried.configure(&configure_block)
           end
-          let(:configure_block) { raise ArgumentError, 'configure_block argument must be defined.'}
+          let(:configure_block) do
+            Proc.new do |config|
+              config.beanstalk_url = 'testuri'
+              config.reserve_timeout = 314
+            end
+          end
           context 'when the configure block argument includes beanstalk_url' do
-            let(:configure_block) { Proc.new { |config| config.beanstalk_url = 'testuri'} }
             describe '#beanstalk_url' do
               it "returns the beanstalk_url specified in the configure block" do
                 expect(Refried.configuration.beanstalk_url).to eq 'testuri'
+              end
+            end
+          end
+          context 'when the configure block argument includes reserve_timeout' do
+            describe '#reserve_timeout' do
+              it "returns the reserve timeout specified in the configure block" do
+                expect(Refried.configuration.reserve_timeout).to eq 314
               end
             end
           end

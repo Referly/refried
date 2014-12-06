@@ -48,10 +48,13 @@ module Refried
 
       # Get a the next job from the tube
       #
+      # @param timeout [Integer] Number of seconds before timing out
+      # @param block [Proc] Callback to perform on reserved job
       # @return [Beanstalk::Job] the next job from the tube
-      def get
+      def get(timeout=nil, &block)
+        timeout ||= ::Refried.configuration.reserve_timeout
         tube = ::Refried.tubes.find self.getter_tube_name.to_s
-        tube.reserve
+        tube.reserve timeout, &block
       end
 
       protected
