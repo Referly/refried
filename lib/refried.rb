@@ -4,6 +4,7 @@ require 'refried/tubes'
 require 'refried/puter'
 require 'refried/getter'
 require 'refried/tube'
+require 'refried/jobs'
 
 # Refried core API methods
 #  based in part on the design of backburner (https://github.com/nesquena/backburner MIT license)
@@ -36,6 +37,13 @@ module Refried
     # @return [Beaneater::Tubes] the collection of Beaneater Tubes
     def tubes
       @tubes ||= Tubes.new
+    end
+
+    # Returns the Beaneater::Jobs object, which exposes methods the allow finding jobs
+    #
+    # @return [Beaneater::Jobs] the object for finding jobs
+    def jobs
+      @jobs ||= Jobs.new
     end
   end
 end
