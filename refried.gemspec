@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'refried'
-  s.version     = '0.0.6-rc4'
-  s.date        = '2014-12-05'
+  s.version     = '0.0.6-rc5'
+  s.date        = '2014-12-09'
   s.summary     = "Make Ruby objects behave like Beanstalk tubes"
   s.description = "Provides acts_as_ mixins for adding Beanstalk tube functionality to your existing Ruby objects."
   s.authors     = ["Courtland Caldwell"]
@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
       "lib/refried/puter.rb",
       "lib/refried/tubes.rb",
       "lib/refried/getter.rb",
-      "lib/refried/tube.rb"
+      "lib/refried/tube.rb",
+      "lib/refried/jobs.rb",
   ] # Remember don't add Rakefile or Gemfile to this list
   s.homepage    =
       'https://github.com/caldwecr/refried'
