@@ -92,6 +92,8 @@ module Refried
             nil
           elsif payload.respond_to? :to_edible
             payload.to_edible
+          elsif payload.is_a? String
+            payload
           else
             # Not sure that this is the appropriate implementation, perhaps to_s is better
             payload.to_json
