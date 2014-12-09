@@ -55,6 +55,12 @@ describe 'Refried' do
         before { Refried.configure reset: true }
         it { is_expected.to be_a Refried::Tubes }
       end
+
+      describe '#jobs' do
+        subject { Refried.jobs }
+        before { Refried.configure reset: true }
+        it { is_expected.to be_a Refried::Jobs }
+      end
     end
   end
 end

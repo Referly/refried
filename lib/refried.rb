@@ -18,7 +18,7 @@ module Refried
     # @param block [Block] an optional configuration block
     # @return [Configuration] the current configuration object
     def configure(opts = {}, &block)
-      if opts.has_key? :reset && opts[:reset]
+      if opts.has_key?(:reset) && opts[:reset]
         @configuration = nil
       end
       yield(configuration) if block_given?
