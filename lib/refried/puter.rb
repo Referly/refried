@@ -45,11 +45,16 @@ module Refried
       # 2. a map of item types to tube names
       # 3. a map of tube aliases to tube names (this corresponds to how ESIndexer & funding override workers will use the gem)
       def put (item, tube_alias = nil)
-        self.attempt_to_log "Puter#put message received. #{item} and tube_alias #{tube_alias}"
-        tube = self.tube(alias: tube_alias)
-        payload = self.generate_message item
-        r = tube.put payload
-        self.attempt_to_log "Puter#put message queued containing #{item}, result = #{r}"
+        begin
+          self.attempt_to_log "Puter#put message received. #{item} and tube_alias #{tube_alias}"
+          tube = self.tube(alias: tube_alias)
+          payload = self.generate_message item
+          r = tube.put payload
+          self.attempt_to_log "Puter#put message queued containing #{item}, result = #{r}"
+        rescue => e
+          self.attempt_to_log "Puter#put failure - exception encountered type = #{e.class} and message = #{e.message}"
+          raise e
+        end
         r
       end
 

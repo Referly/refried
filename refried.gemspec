@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'refried'
-  s.version     = '0.0.6-rc6'
-  s.date        = '2014-12-09'
+  s.version     = '0.0.6-rc7'
+  s.date        = '2015-01-02'
   s.summary     = "Make Ruby objects behave like Beanstalk tubes"
   s.description = "Provides acts_as_ mixins for adding Beanstalk tube functionality to your existing Ruby objects."
   s.authors     = ["Courtland Caldwell"]
