@@ -16,5 +16,5 @@
 .idea/
 
 ## Gemfile for development
-Gemfile
-Gemfile.lock
+#Gemfile
+#Gemfile.lock
