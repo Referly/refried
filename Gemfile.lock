@@ -1,4 +1,5 @@
 GEM
+  remote: https://rubygems.org/
   specs:
     beaneater (0.3.3)
     byebug (3.5.1)
