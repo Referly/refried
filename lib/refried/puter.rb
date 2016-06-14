@@ -1,5 +1,5 @@
 require 'beaneater'
-
+require "lincoln_logger"
 module Refried
   module Puter
     module ActsAsPuter
@@ -144,7 +144,7 @@ module Refried
         begin
           logger.info message
         rescue => e
-          #puts "Failed to access logger, message that should have been logged = #{message}"
+          LincolnLogger.logger.info message
         end
       end
     end
