@@ -1,5 +1,5 @@
 require 'beaneater'
-
+require "lincoln_logger"
 module Refried
   module Puter
     module ActsAsPuter
