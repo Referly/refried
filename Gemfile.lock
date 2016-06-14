@@ -10,6 +10,7 @@ GEM
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    lincoln_logger (1.1.0)
     multi_json (1.10.1)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
@@ -37,6 +38,7 @@ PLATFORMS
 DEPENDENCIES
   beaneater (~> 0.3, >= 0.3.3)
   byebug
+  lincoln_logger (~> 1.1)
   rspec
   simplecov
   yard
